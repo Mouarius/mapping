@@ -13,6 +13,12 @@ const { title } = Astro.props;
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
@@ -22,30 +28,94 @@ const { title } = Astro.props;
 </html>
 <style is:global>
 	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
+		--text-50: #e7e9fe;
+		--text-100: #cfd3fc;
+		--text-200: #9fa8f9;
+		--text-300: #6e7cf7;
+		--text-400: #3e50f4;
+		--text-500: #0e25f1;
+		--text-600: #0b1dc1;
+		--text-700: #081691;
+		--text-800: #060f60;
+		--text-900: #030730;
+		--text-950: #010418;
+
+		--background-50: #e8e8fd;
+		--background-100: #d1d1fa;
+		--background-200: #a2a2f6;
+		--background-300: #7474f1;
+		--background-400: #4545ed;
+		--background-500: #1717e8;
+		--background-600: #1212ba;
+		--background-700: #0e0e8b;
+		--background-800: #09095d;
+		--background-900: #05052e;
+		--background-920: #020217dd;
+		--background-950: #020217;
+
+		--primary-50: #ecedf8;
+		--primary-100: #dadbf1;
+		--primary-200: #b5b7e3;
+		--primary-300: #8f93d6;
+		--primary-400: #6a6fc8;
+		--primary-500: #454bba;
+		--primary-600: #373c95;
+		--primary-700: #292d70;
+		--primary-800: #1c1e4a;
+		--primary-900: #0e0f25;
+		--primary-950: #070713;
+
+		--secondary-50: #f5e7fe;
+		--secondary-100: #ebcffc;
+		--secondary-200: #d79efa;
+		--secondary-300: #c36ef7;
+		--secondary-400: #ae3df5;
+		--secondary-500: #9a0df2;
+		--secondary-600: #7b0ac2;
+		--secondary-700: #5d0891;
+		--secondary-800: #3e0561;
+		--secondary-900: #1f0330;
+		--secondary-950: #0f0118;
+
+		--accent-50: #fce7fe;
+		--accent-100: #f9cffc;
+		--accent-200: #f29efa;
+		--accent-300: #ec6ef7;
+		--accent-400: #e53df5;
+		--accent-500: #df0df2;
+		--accent-600: #b20ac2;
+		--accent-700: #860891;
+		--accent-800: #590561;
+		--accent-900: #2d0330;
+		--accent-950: #160118;
+	}
+	body {
+		margin: 0;
+		padding: 0px 18px;
+		background: var(--background-950);
+	}
+	h1 {
+		margin: 0;
+		padding: 0;
+	}
+	ul{
+		margin:0;
+		padding:0;
+	}
+	a{
+		color: var(--text-50);
+		text-decoration: none;
+	}
+	a:hover{
+		font-weight: bold;
+	}
+	li{
+		list-style-type: none;
 	}
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		background-size: 224px;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+		font-family: "Rethink Sans", monospace, system-ui, sans-serif;
+		font-weight: 400;
+		background: var(--background-950);
+		color:var(--text-100);
 	}
 </style>
