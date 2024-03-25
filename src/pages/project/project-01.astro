@@ -6,7 +6,48 @@ const title = "project-01";
 ---
 
 <Layout title={title}>
-	<Project title={title} >
-	</Project>
+	<Project title={title} />
 	<script src="../../scripts/project/project-01.ts"></script>
+	<script>
+		import p5 from "p5";
+		import { sketch } from "../../scripts/project/project-01";
+
+		const container: HTMLDivElement | null =
+			document.querySelector("#p5-container");
+
+		function initProject(container: HTMLDivElement | null) {
+			if (!container) return;
+			return new p5(sketch, container);
+		}
+
+		const project = initProject(container);
+
+		function toggleFullScreen() {
+			if (!document.fullscreenElement) {
+				document.documentElement.requestFullscreen();
+			} else if (document.exitFullscreen) {
+				document.exitFullscreen();
+			}
+		}
+		function toggleCursor() {
+			if (!container) return;
+			if (container.style.cursor === "none") {
+				return (container.style.cursor = "default");
+			}
+			container.style.cursor = "none";
+		}
+		window.addEventListener("keypress", (evt) => {
+			if (evt.key === " ") {
+				toggleFullScreen();
+				if (!container) return;
+				toggleCursor()
+				setTimeout(() => {
+					project?.resizeCanvas(
+						container?.clientWidth,
+						container?.clientHeight,
+					);
+				}, 1000);
+			}
+		});
+	</script>
 </Layout>

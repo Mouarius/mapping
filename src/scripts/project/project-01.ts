@@ -40,16 +40,12 @@ const cosineInterpolate = (start: number, end: number, amt: number) => {
 export const sketch = (p: p5) => {
   if (!container) return
 
-  const width = container.clientWidth
-  const height = container.clientHeight
+  let steps = 1;
 
   const rh = 20
-  const steps = Math.round(height / rh)
-  const circCenter = { x: width / 2, y: height / 2 }
 
   const accent = primary50
 
-  p.colorMode(p.HSL)
   const bg = p.color(...background950)
 
   let counter = 0
@@ -57,12 +53,16 @@ export const sketch = (p: p5) => {
   let direction = STEP
 
   p.setup = () => {
-    p.createCanvas(width, height)
+    p.createCanvas(container.clientWidth, container.clientHeight)
+    p.colorMode(p.HSL)
+    steps = Math.round(p.height / rh)
     direction = STEP
   }
 
   p.draw = () => {
-    if (counter > width) {
+    const circCenter = { x: p.width / 2, y: p.height / 2 }
+    steps = Math.round(p.height / rh)
+    if (counter > p.width) {
       direction = -STEP
     }
     if (counter < 0) {
@@ -74,14 +74,14 @@ export const sketch = (p: p5) => {
     p.background(bg)
 
     for (const i of Array.from(Array(steps)).keys()) {
-      for (const j of Array.from(Array(width)).keys()) {
-        const distFactor = Math.sqrt((j - circCenter.x) ** 2 + (i * rh - circCenter.y) ** 2) / width
+      for (const j of Array.from(Array(p.width)).keys()) {
+        const distFactor = Math.sqrt((j - circCenter.x) ** 2 + (i * rh - circCenter.y) ** 2) / p.width
         let lightness = 0;
         if (i % 2 === 0) {
-          lightness = cosineInterpolate(0, 20, (width - counter) / width * 3);
+          lightness = cosineInterpolate(0, 20, (p.width - counter) / p.width * 3);
         }
         else {
-          lightness = powInterpolate(60, 0, distFactor * 5 - counter / width, 1) + cosineInterpolate(0, 10, (counter - j) / width);
+          lightness = powInterpolate(60, 0, distFactor * 5 - counter / p.width, 1) + cosineInterpolate(0, 10, (counter - j) / p.width);
         }
         p.fill(p.color(accent[0], accent[1], lightness))
         p.rect(j, i * rh, 1, rh)
@@ -91,4 +91,3 @@ export const sketch = (p: p5) => {
   }
 }
 
-export const project01 = container && new p5(sketch, container)
