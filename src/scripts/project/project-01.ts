@@ -55,6 +55,7 @@ export const sketch = (p: p5) => {
   p.setup = () => {
     p.createCanvas(container.clientWidth, container.clientHeight)
     p.colorMode(p.HSL)
+    p.frameRate(30)
     steps = Math.round(p.height / rh)
     direction = STEP
   }
